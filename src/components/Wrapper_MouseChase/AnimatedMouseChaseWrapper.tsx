@@ -21,7 +21,7 @@ interface Props {
     children?: ReactNode,
 }
 
-const Wrapper_MouseChase: React.FC<Props & HTMLProps<HTMLDivElement>> = ({
+const AnimatedMouseChaseWrapper: React.FC<Props & HTMLProps<HTMLDivElement>> = ({
     multiplier = 5,
     tension = 120,
     friction = 14,
@@ -85,4 +85,4 @@ const Wrapper_MouseChase: React.FC<Props & HTMLProps<HTMLDivElement>> = ({
     );
 };
 
-export default Wrapper_MouseChase;
+export default AnimatedMouseChaseWrapper;
