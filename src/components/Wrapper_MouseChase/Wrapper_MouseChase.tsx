@@ -1,5 +1,5 @@
 import styles from './styles.module.css'
-import { useState, useRef, useLayoutEffect, ReactNode } from 'react'
+import { useState, useRef, useLayoutEffect, ReactNode, HTMLProps } from 'react'
 import { useSpring, animated } from "react-spring";
 
 interface Props {
@@ -21,11 +21,12 @@ interface Props {
     children?: ReactNode,
 }
 
-const Wrapper_MouseChase: React.FC<Props> = ({
+const Wrapper_MouseChase: React.FC<Props & HTMLProps<HTMLDivElement>> = ({
     multiplier = 5,
     tension = 120,
     friction = 14,
     children,
+    style,
     ...props
   }) => {
 
@@ -73,13 +74,13 @@ const Wrapper_MouseChase: React.FC<Props> = ({
 
     return (
         <animated.div
+        {...props}
         ref={ref}
-        style={{...elementStyle}}
-        className={styles.wrapper}
+        style={{...style, ...elementStyle}}
+        className={[styles.wrapper, props.className].join(' ')}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onMouseMove={handleMouseMove}
-        {...props}
         >{children}</animated.div>
     );
 };
