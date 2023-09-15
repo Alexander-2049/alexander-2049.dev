@@ -15,9 +15,6 @@ const meta = {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     children: { control: 'text' },
-    multiplier: { control: 'number', defaultValue: 5 },
-    tension: { control: 'number', defaultValue: 120 },
-    friction: { control: 'number', defaultValue: 140 },
   },
 } satisfies Meta<typeof AnimatedMouseChaseWrapper>;
 
