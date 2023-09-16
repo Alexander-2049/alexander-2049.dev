@@ -107,8 +107,11 @@ const AnimatedDots: React.FC<Props> = ({
     * 
     * 
     * interface Point {
-    *   xAxis = number;
-    *   yAxis = number;
+    *   x: number; // axis
+    *   y: number; // axis
+    *   distance: number | null;
+    *   scale: number;
+    *   color: string;
     * }
     * 
     * function setup() {
@@ -122,8 +125,11 @@ const AnimatedDots: React.FC<Props> = ({
     *   const firstPointY = ( block.height - dotsHeight ) / 2; // counting from top
     * 
     *   const points: Point[] = getAllPointsWithCoordinates({firstPointX, firstPointY, pointsInRow, pointsInColumn, distanceBetweenPoints});
-    *   
-    * 
+    *   // MAYBE points should be stored in a class to do methods for these points
+    *   // so that would be done to do something like
+    *   // points.colorize()
+    *   // so that would be applied to all points
+    *   // points.setCursorPosition(x, y)
     * }
     * 
     * 
