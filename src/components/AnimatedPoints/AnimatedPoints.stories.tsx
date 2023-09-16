@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import AnimatedDots from './AnimatedDots';
+import AnimatedPoints from './AnimatedPoints';
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
-  title: 'Graphics/AnimatedDots',
-  component: AnimatedDots,
+  title: 'Graphics/AnimatedPoints',
+  component: AnimatedPoints,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'centered',
@@ -26,7 +26,7 @@ const meta = {
     isSizeChange: { control: 'boolean' },
     isGradientAnimation: { control: 'boolean' },
   },
-} satisfies Meta<typeof AnimatedDots>;
+} satisfies Meta<typeof AnimatedPoints>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

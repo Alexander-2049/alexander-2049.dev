@@ -102,8 +102,34 @@ const AnimatedDots: React.FC<Props> = ({
     * so "x" is an "x" of the first point
     * and "y" is a "y" fo the first point
     * 
-    * and now we are able to get any point position by summing and multiplying
-    * TODO: create a function that does that
+    * and now we are able to get any point position
+    * 
+    * 
+    * 
+    * interface Point {
+    *   xAxis = number;
+    *   yAxis = number;
+    * }
+    * 
+    * function setup() {
+    *   const pointsInRow = getPointsCapacity({pointSize, distanceBetweenPoints, width: block.width})
+    *   const pointsInColumn = getPointsCapacity({pointSize, distanceBetweenPoints, height: block.height})
+    *   
+    *   const pointsWidth = getPointsLength({pointsAmount: pointsInRow, pointSize, distanceBetweenPoints})
+    *   const pointsHeight = getPointsLength({pointsAmount: pointsInColumn, pointSize, distanceBetweenPoints})
+    * 
+    *   const firstPointX = ( block.width - dotsWidth ) / 2; // counting from left
+    *   const firstPointY = ( block.height - dotsHeight ) / 2; // counting from top
+    * 
+    *   const points: Point[] = getAllPointsWithCoordinates({firstPointX, firstPointY, pointsInRow, pointsInColumn, distanceBetweenPoints});
+    *   
+    * 
+    * }
+    * 
+    * 
+    * 
+    * 
+    * 
     */
 
     return (
