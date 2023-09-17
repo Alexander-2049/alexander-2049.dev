@@ -38,9 +38,9 @@ export class Point {
 
         // Adjust the point size based on distance
         if (this.distance < hoverRadius) { 
-            this.size = 16 + (hoverRadius - this.distance) / 32;
+            this.size = basePointSize + (hoverRadius - this.distance) / 4;
         } else {
-            this.size = 16;
+            this.size = basePointSize;
         }
     }
 }
