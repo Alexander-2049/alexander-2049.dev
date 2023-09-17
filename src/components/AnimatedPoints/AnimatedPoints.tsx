@@ -1,4 +1,6 @@
-import { useRef } from 'react';
+'use client';
+
+import { useLayoutEffect, useRef, useState } from 'react';
 
 interface Props {
     pointSize?: number;
@@ -137,6 +139,14 @@ const AnimatedDots: React.FC<Props> = ({
     * 
     * 
     */
+
+    const [wrapperSize, setWrapperSize] = useState({width: 0, height: 0});
+
+    useLayoutEffect(() => {
+        if(ref.current === null) return;
+        const element = ref.current as HTMLElement; // Type assertion
+        setWrapperSize({ width: element.offsetWidth, height: element.offsetHeight });
+    }, [])
 
     return (
         <div
