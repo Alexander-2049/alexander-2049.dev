@@ -6,7 +6,6 @@ interface Parameters {
     pointMaxSize?: number;
     distanceBetweenPoints?: number;
     hoverRadius?: number;
-    padding?: number;
     colorMain?: string;
     colorSecondary?: string;
     isHoverEffect?: boolean;
@@ -32,9 +31,8 @@ export class Points {
         this.parameters = {
             basePointSize: 16,
             pointMaxSize: 32,
-            distanceBetweenPoints: 16,
+            distanceBetweenPoints: 20,
             hoverRadius: 180,
-            padding: 24,
             colorMain: '#ECECEC',
             colorSecondary: '#B7B7B7',
             isHoverEffect: true,
@@ -44,6 +42,10 @@ export class Points {
             ...parameters, // Override default values with provided values if any
         };
         this.setup();
+    }
+
+    public get() {
+        return this.points;
     }
 
     private setup() {
@@ -63,9 +65,9 @@ export class Points {
 
         const pointsTotalWidth = this.getPointsLength(pointsInRow, this.parameters.basePointSize, this.parameters.distanceBetweenPoints);
         const pointsTotalHeight = this.getPointsLength(pointsInColumn, this.parameters.basePointSize, this.parameters.distanceBetweenPoints);
-
-        const firstPointAxisX = ( this.width - pointsTotalWidth ) / 2 + (this.parameters.basePointSize / 2); // counting from left
-        const firstPointAxisY = ( this.height - pointsTotalHeight ) / 2 + (this.parameters.basePointSize / 2); // counting from top
+        
+        const firstPointAxisX = this.width - pointsTotalWidth + (this.parameters.basePointSize / 2);
+        const firstPointAxisY = this.height - pointsTotalHeight + (this.parameters.basePointSize / 2);
 
         for(let i = 0; i < pointsInRow; i++) {
             for(let j = 0; j < pointsInColumn; j++) {
@@ -83,36 +85,12 @@ export class Points {
     }
 
     private getPointsLength(pointsAmount: number, pointSize: number, distanceBetweenPoints: number) {
-        return (pointsAmount * pointSize) + (distanceBetweenPoints * pointSize) - distanceBetweenPoints;
+        return (pointSize * pointsAmount) + (distanceBetweenPoints * pointsAmount) - distanceBetweenPoints;
     }
 
     private getCapacity(pointSize: number, distanceBetweenPoints: number, elementLength: number): number {
-
-        let fits = true;
-        let size = 0;
-        let state = 1; // 1 - point | 0 - distanceBetween
-        let amount = 0;
-        while(fits) {
-          if(state === 1) {
-              state = 0;
-              if( ( size + pointSize ) < this.width ) {
-                  size += pointSize;
-                  amount++;
-              } else {
-                  fits = false;
-              }
-          }
-          if(state === 0) {
-              state = 1;
-              if( ( size + distanceBetweenPoints ) < this.width ) {
-                  size += pointSize;
-              } else {
-                  fits = false;
-              }
-          }
-        }
-
-        return size;
+        const totalSize = pointSize + distanceBetweenPoints;
+        return Math.floor(elementLength / totalSize);
     }
 
     public setCursorPosition({x, y}: Position): void {

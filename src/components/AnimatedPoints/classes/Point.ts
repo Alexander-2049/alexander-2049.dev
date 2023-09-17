@@ -21,7 +21,6 @@ export class Point {
             pointMaxSize= 32,
             distanceBetweenPoints= 16,
             hoverRadius= 180,
-            padding= 24,
             colorMain= '#ECECEC',
             colorSecondary= '#B7B7B7',
             isHoverEffect= true,

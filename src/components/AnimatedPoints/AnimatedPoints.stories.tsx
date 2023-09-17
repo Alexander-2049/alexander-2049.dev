@@ -14,7 +14,7 @@ const meta = {
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    pointSize: { control: { type: 'range', min:0, max:240, step: 4 } },
+    basePointSize: { control: { type: 'range', min:0, max:240, step: 4 } },
     pointMaxSize: { control: { type: 'range', min:0, max:240, step: 4 } },
     distanceBetweenPoints: { control: { type: 'range', min:0, max:240, step: 4 } },
     hoverRadius: { control: { type: 'range', min:0, max:240, step: 4 } },
