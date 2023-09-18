@@ -23,7 +23,7 @@ const meta = {
     colorSecondary: { control: 'color' },
     isHoverEffect: { control: 'boolean' },
     isColorChange: { control: 'boolean' },
-    isSizeChange: { control: 'boolean' },
+    isScaleChange: { control: 'boolean' },
     isGradientAnimation: { control: 'boolean' },
   },
 } satisfies Meta<typeof AnimatedPoints>;

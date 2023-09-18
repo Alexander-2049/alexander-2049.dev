@@ -15,8 +15,9 @@ interface Props {
     colorSecondary?: string;
     isHoverEffect?: boolean;
     isColorChange?: boolean;
-    isSizeChange?: boolean;
+    isScaleChange?: boolean;
     isGradientAnimation?: boolean;
+    pointBorderRadius?: number;
 }
 
 const AnimatedPoints: React.FC<Props> = ({
@@ -29,8 +30,9 @@ const AnimatedPoints: React.FC<Props> = ({
     colorSecondary = '#B7B7B7',
     isHoverEffect = true,
     isColorChange = true,
-    isSizeChange = true,
-    isGradientAnimation = true
+    isScaleChange = true,
+    isGradientAnimation = true,
+    pointBorderRadius = 50,
 }) => {
 
     const [upd, setUpd] = useState(0);
@@ -47,7 +49,13 @@ const AnimatedPoints: React.FC<Props> = ({
             colorMain,
             colorSecondary,
             hoverRadius,
-            pointMaxScale
+            pointMaxScale,
+            padding,
+            isScaleChange,
+            isHoverEffect,
+            isGradientAnimation,
+            isColorChange,
+            pointBorderRadius
           })
         );
       }, [
@@ -60,10 +68,11 @@ const AnimatedPoints: React.FC<Props> = ({
         colorSecondary,
         isHoverEffect,
         isColorChange,
-        isSizeChange,
+        isScaleChange,
         isGradientAnimation,
         width,
-        height
+        height,
+        pointBorderRadius
       ]);
     
     const handleMouseLeave = () => {
@@ -96,8 +105,8 @@ const AnimatedPoints: React.FC<Props> = ({
             onMouseMove={handleMouseMove}
             style={{
                 position: 'relative',
-                width: '350px',
-                height: '250px',
+                width: '700px',
+                height: '700px',
                 resize: 'horizontal'
             }}
         >

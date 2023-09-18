@@ -1,5 +1,6 @@
 import { Point } from './Point';
 import { Position } from '../types/Position';
+import { defaultPointsParameters } from './defaultParameters';
 
 export interface PointsParameters {
     basePointSize?: number;
@@ -11,8 +12,9 @@ export interface PointsParameters {
     colorSecondary?: string;
     isHoverEffect?: boolean;
     isColorChange?: boolean;
-    isSizeChange?: boolean;
+    isScaleChange?: boolean;
     isGradientAnimation?: boolean;
+    pointBorderRadius?: number;
 }
 
 export class Points {
@@ -23,26 +25,17 @@ export class Points {
     points: Point[];
     readonly parameters: PointsParameters;
 
-    constructor(width: number, height: number, parameters?: PointsParameters) {
+    constructor(
+        width: number,
+        height: number,
+        parameters: PointsParameters = {}
+    ) {
         this.width = width;
         this.height = height;
-        this.cursorPosition = {x: null, y: null};
+        this.cursorPosition = { x: null, y: null };
         this.isCursorInside = false;
         this.points = [];
-        this.parameters = {
-            basePointSize: 16,
-            pointMaxScale: 4,
-            distanceBetweenPoints: 20,
-            hoverRadius: 180,
-            colorMain: '#ECECEC',
-            colorSecondary: '#B7B7B7',
-            isHoverEffect: true,
-            isColorChange: true,
-            isSizeChange: true,
-            isGradientAnimation: true,
-            padding: 16,
-            ...parameters, // Override default values with provided values if any
-        };
+        this.parameters = { ...defaultPointsParameters, ...parameters };
         this.setup();
     }
 
@@ -53,16 +46,19 @@ export class Points {
     private setup() {
         if (this.parameters.basePointSize === undefined) return null;
         if (this.parameters.distanceBetweenPoints === undefined) return null;
+        if (this.parameters.padding === undefined) return null;
 
         const pointsInRow = this.getCapacity(
             this.parameters.basePointSize,
             this.parameters.distanceBetweenPoints,
-            this.width
+            this.width,
+            this.parameters.padding
         );
         const pointsInColumn = this.getCapacity(
             this.parameters.basePointSize,
             this.parameters.distanceBetweenPoints,
-            this.height
+            this.height,
+            this.parameters.padding
         );
 
         const pointsTotalWidth = this.getPointsLength(pointsInRow, this.parameters.basePointSize, this.parameters.distanceBetweenPoints);
@@ -75,6 +71,7 @@ export class Points {
             for(let j = 0; j < pointsInColumn; j++) {
                 const {x, y} = this.getPointAxisCoordinates(i, j, firstPointAxisX, firstPointAxisY, this.parameters.basePointSize, this.parameters.distanceBetweenPoints);
                 this.points.push(new Point(x, y, this));
+                if(this.points.length >= 400) return;
             }
         }
     }
@@ -90,9 +87,9 @@ export class Points {
         return (pointSize * pointsAmount) + (distanceBetweenPoints * pointsAmount) - distanceBetweenPoints;
     }
 
-    private getCapacity(pointSize: number, distanceBetweenPoints: number, elementLength: number): number {
+    private getCapacity(pointSize: number, distanceBetweenPoints: number, canvasSize: number, padding: number): number {
         const totalSize = pointSize + distanceBetweenPoints;
-        return Math.floor(elementLength / totalSize);
+        return Math.floor((canvasSize - padding * 2) / totalSize);
     }
 
     public setCursorPosition({x, y}: Position): void {
