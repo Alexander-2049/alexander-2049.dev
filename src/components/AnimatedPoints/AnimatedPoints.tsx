@@ -39,9 +39,30 @@ const AnimatedPoints: React.FC<Props> = ({
         distanceBetweenPoints
     }));
 
-    useEffect(() => {
-        setPoints(new Points(width, height));
-    }, [width, height])
+
+      // The component will re-render whenever any of the props change
+      useEffect(() => {
+        setPoints(
+          new Points(width, height, {
+            basePointSize,
+            distanceBetweenPoints
+          })
+        );
+      }, [
+        basePointSize,
+        pointMaxSize,
+        distanceBetweenPoints,
+        hoverRadius,
+        padding,
+        defaultColor,
+        hoverColor,
+        isHoverEffect,
+        isColorChange,
+        isSizeChange,
+        isGradientAnimation,
+        width,
+        height
+      ]);
 
     useEffect(() => {
         console.log(points.get()[4]?.distance)
@@ -77,8 +98,8 @@ const AnimatedPoints: React.FC<Props> = ({
             onMouseMove={handleMouseMove}
             style={{
                 position: 'relative',
-                width: '700px',
-                height: '500px',
+                width: '350px',
+                height: '250px',
                 backgroundColor: 'yellow'
             }}
         >
@@ -90,8 +111,8 @@ const AnimatedPoints: React.FC<Props> = ({
                     top: `${point.y}px`,
                     transform: 'translate(-50%, -50%)',
                     backgroundColor: 'red',
-                    width: '4px',
-                    height: '4px',
+                    width: `${basePointSize}px`,
+                    height: `${basePointSize}px`,
                     pointerEvents: 'none'
                 }}></div>
             ))}
