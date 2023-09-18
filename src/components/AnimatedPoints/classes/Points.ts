@@ -66,8 +66,8 @@ export class Points {
         const pointsTotalWidth = this.getPointsLength(pointsInRow, this.parameters.basePointSize, this.parameters.distanceBetweenPoints);
         const pointsTotalHeight = this.getPointsLength(pointsInColumn, this.parameters.basePointSize, this.parameters.distanceBetweenPoints);
         
-        const firstPointAxisX = this.width - pointsTotalWidth + (this.parameters.basePointSize / 2);
-        const firstPointAxisY = this.height - pointsTotalHeight + (this.parameters.basePointSize / 2);
+        const firstPointAxisX = (this.width - pointsTotalWidth) / 2 + (this.parameters.basePointSize / 2);
+        const firstPointAxisY = (this.height - pointsTotalHeight) / 2 + (this.parameters.basePointSize / 2);
 
         for(let i = 0; i < pointsInRow; i++) {
             for(let j = 0; j < pointsInColumn; j++) {
