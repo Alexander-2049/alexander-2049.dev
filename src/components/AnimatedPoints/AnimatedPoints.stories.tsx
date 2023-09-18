@@ -14,13 +14,13 @@ const meta = {
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    basePointSize: { control: { type: 'range', min:0, max:240, step: 4 } },
-    pointMaxSize: { control: { type: 'range', min:0, max:240, step: 4 } },
-    distanceBetweenPoints: { control: { type: 'range', min:0, max:240, step: 4 } },
+    basePointSize: { control: { type: 'range', min:1, max:60, step: 1 } },
+    pointMaxScale: { control: { type: 'range', min:1, max:4, step: 0.1 } },
+    distanceBetweenPoints: { control: { type: 'range', min:0, max:60, step: 11 } },
     hoverRadius: { control: { type: 'range', min:0, max:240, step: 4 } },
     padding: { control: { type: 'range', min:0, max:240, step: 4 } },
-    defaultColor: { control: 'color' },
-    hoverColor: { control: 'color' },
+    colorMain: { control: 'color' },
+    colorSecondary: { control: 'color' },
     isHoverEffect: { control: 'boolean' },
     isColorChange: { control: 'boolean' },
     isSizeChange: { control: 'boolean' },

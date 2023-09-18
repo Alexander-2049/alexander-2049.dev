@@ -1,12 +1,13 @@
 import { Point } from './Point';
 import { Position } from '../types/Position';
 
-interface Parameters {
+export interface PointsParameters {
     basePointSize?: number;
-    pointMaxSize?: number;
+    pointMaxScale?: number;
     distanceBetweenPoints?: number;
     hoverRadius?: number;
     colorMain?: string;
+    padding?: number;
     colorSecondary?: string;
     isHoverEffect?: boolean;
     isColorChange?: boolean;
@@ -20,9 +21,9 @@ export class Points {
     cursorPosition: Position;
     isCursorInside: boolean;
     points: Point[];
-    readonly parameters: Parameters;
+    readonly parameters: PointsParameters;
 
-    constructor(width: number, height: number, parameters?: Parameters) {
+    constructor(width: number, height: number, parameters?: PointsParameters) {
         this.width = width;
         this.height = height;
         this.cursorPosition = {x: null, y: null};
@@ -30,7 +31,7 @@ export class Points {
         this.points = [];
         this.parameters = {
             basePointSize: 16,
-            pointMaxSize: 32,
+            pointMaxScale: 4,
             distanceBetweenPoints: 20,
             hoverRadius: 180,
             colorMain: '#ECECEC',
@@ -39,6 +40,7 @@ export class Points {
             isColorChange: true,
             isSizeChange: true,
             isGradientAnimation: true,
+            padding: 16,
             ...parameters, // Override default values with provided values if any
         };
         this.setup();
@@ -104,6 +106,7 @@ export class Points {
         }
 
         this.cursorPosition = {x, y};
+        this.update();
     }
 
     public update() {

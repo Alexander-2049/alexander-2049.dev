@@ -3,15 +3,16 @@
 import { useEffect, useState } from 'react';
 import { Points } from './classes/Points';
 import { useElementSize } from '../../hooks/useElementResize';
+import AnimatedPoint from './AnimatedPoint';
 
 interface Props {
     basePointSize?: number;
-    pointMaxSize?: number;
+    pointMaxScale?: number;
     distanceBetweenPoints?: number;
     hoverRadius?: number;
     padding?: number;
-    defaultColor?: string;
-    hoverColor?: string;
+    colorMain?: string;
+    colorSecondary?: string;
     isHoverEffect?: boolean;
     isColorChange?: boolean;
     isSizeChange?: boolean;
@@ -20,12 +21,12 @@ interface Props {
 
 const AnimatedPoints: React.FC<Props> = ({
     basePointSize = 16,
-    pointMaxSize = 32,
+    pointMaxScale = 2.7,
     distanceBetweenPoints = 16,
     hoverRadius = 180,
     padding = 24,
-    defaultColor = '#ECECEC',
-    hoverColor = '#B7B7B7',
+    colorMain = '#ECECEC',
+    colorSecondary = '#B7B7B7',
     isHoverEffect = true,
     isColorChange = true,
     isSizeChange = true,
@@ -34,10 +35,7 @@ const AnimatedPoints: React.FC<Props> = ({
 
     const [upd, setUpd] = useState(0);
     const [squareRef, { width, height }] = useElementSize()
-    const [points, setPoints] = useState<Points>(new Points(width, height, {
-        basePointSize,
-        distanceBetweenPoints
-    }));
+    const [points, setPoints] = useState<Points>(new Points(width, height));
 
 
       // The component will re-render whenever any of the props change
@@ -45,17 +43,21 @@ const AnimatedPoints: React.FC<Props> = ({
         setPoints(
           new Points(width, height, {
             basePointSize,
-            distanceBetweenPoints
+            distanceBetweenPoints,
+            colorMain,
+            colorSecondary,
+            hoverRadius,
+            pointMaxScale
           })
         );
       }, [
         basePointSize,
-        pointMaxSize,
+        pointMaxScale,
         distanceBetweenPoints,
         hoverRadius,
         padding,
-        defaultColor,
-        hoverColor,
+        colorMain,
+        colorSecondary,
         isHoverEffect,
         isColorChange,
         isSizeChange,
@@ -63,10 +65,6 @@ const AnimatedPoints: React.FC<Props> = ({
         width,
         height
       ]);
-
-    useEffect(() => {
-        console.log(points.get()[4]?.distance)
-    }, [points, upd])
     
     const handleMouseLeave = () => {
         points.setCursorPosition({ x: null, y: null });
@@ -100,21 +98,11 @@ const AnimatedPoints: React.FC<Props> = ({
                 position: 'relative',
                 width: '350px',
                 height: '250px',
-                backgroundColor: 'yellow'
+                resize: 'horizontal'
             }}
         >
-            {points.get().map(point => (
-                <div key={`${point.x}.${point.y}`} style={{
-                    display: 'block',
-                    position: 'absolute',
-                    left: `${point.x}px`,
-                    top: `${point.y}px`,
-                    transform: 'translate(-50%, -50%)',
-                    backgroundColor: 'red',
-                    width: `${basePointSize}px`,
-                    height: `${basePointSize}px`,
-                    pointerEvents: 'none'
-                }}></div>
+            {points.get().map((point, index) => (
+                <AnimatedPoint key={`point.${index}`} point={point}/>
             ))}
         </div>
     );
