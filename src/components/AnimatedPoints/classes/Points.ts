@@ -14,6 +14,7 @@ export interface PointsParameters {
     isScaleChange: boolean;
     isGradientAnimation: boolean;
     pointBorderRadius: number;
+    transitionDuration: number;
 }
 
 export class Points {
@@ -28,10 +29,10 @@ export class Points {
         width: number,
         height: number,
         parameters: PointsParameters = {
-            basePointSize: 48,
+            basePointSize: 12,
             pointMaxScale: 4,
-            distanceBetweenPoints: 16,
-            hoverRadius: 180,
+            distanceBetweenPoints: 32,
+            hoverRadius: 240,
             colorMain: '#ECECEC',
             colorSecondary: '#B7B7B7',
             padding: 16,
@@ -40,6 +41,7 @@ export class Points {
             isScaleChange: true,
             isGradientAnimation: true,
             pointBorderRadius: 50,
+            transitionDuration: 250,
         }
     ) {
         this.width = width;

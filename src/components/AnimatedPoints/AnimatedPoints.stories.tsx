@@ -25,6 +25,7 @@ const meta = {
     isColorChange: { control: 'boolean' },
     isScaleChange: { control: 'boolean' },
     isGradientAnimation: { control: 'boolean' },
+    transitionDuration: { control: { type: 'range', min:0, max:1500, step: 4 } },
   },
 } satisfies Meta<typeof AnimatedPoints>;
 

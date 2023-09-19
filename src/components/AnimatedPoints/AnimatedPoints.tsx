@@ -11,6 +11,7 @@ interface Props {
     distanceBetweenPoints?: number;
     hoverRadius?: number;
     padding?: number;
+    transitionDuration?: number;
     colorMain?: string;
     colorSecondary?: string;
     isHoverEffect?: boolean;
@@ -21,10 +22,10 @@ interface Props {
 }
 
 const AnimatedPoints: React.FC<Props> = ({
-    basePointSize = 16,
-    pointMaxScale = 2.7,
-    distanceBetweenPoints = 16,
-    hoverRadius = 180,
+    basePointSize = 12,
+    pointMaxScale = 4.2,
+    distanceBetweenPoints = 32,
+    hoverRadius = 190,
     padding = 24,
     colorMain = '#ECECEC',
     colorSecondary = '#B7B7B7',
@@ -33,6 +34,7 @@ const AnimatedPoints: React.FC<Props> = ({
     isScaleChange = true,
     isGradientAnimation = true,
     pointBorderRadius = 50,
+    transitionDuration = 250,
 }) => {
 
     const [upd, setUpd] = useState(0);
@@ -55,7 +57,8 @@ const AnimatedPoints: React.FC<Props> = ({
             isHoverEffect,
             isGradientAnimation,
             isColorChange,
-            pointBorderRadius
+            pointBorderRadius,
+            transitionDuration
           })
         );
       }, [
@@ -72,7 +75,8 @@ const AnimatedPoints: React.FC<Props> = ({
         isGradientAnimation,
         width,
         height,
-        pointBorderRadius
+        pointBorderRadius,
+        transitionDuration
       ]);
     
     const handleMouseLeave = () => {

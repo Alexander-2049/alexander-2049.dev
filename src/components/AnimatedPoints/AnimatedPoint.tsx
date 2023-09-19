@@ -11,11 +11,11 @@ const AnimatedPoint = ({ point }: Props) => {
     const { size } = useSpring({
         from: { size: 0 }, // Set your initial size here
         to: { size: point.scale },
-        config: { duration: 500, easing: t => 1 - (1 - t) * (1 - t) }, // Use ease-out easing
+        config: { duration: point.parameters.transitionDuration, easing: t => 1 - (1 - t) * (1 - t) }, // Use ease-out easing
     });
     const color = useSpring({
         to: { backgroundColor: point.color },
-        config: { duration: 500, easing: t => 1 - (1 - t) * (1 - t) }, // Use ease-out easing
+        config: { duration: point.parameters.transitionDuration, easing: t => 1 - (1 - t) * (1 - t) }, // Use ease-out easing
     })
 
     const basePointSize = point.parameters.basePointSize;
@@ -28,7 +28,7 @@ const AnimatedPoint = ({ point }: Props) => {
                 width: `${point.parameters.basePointSize}px`, // Animate the width
                 height: `${point.parameters.basePointSize}px`, // Animate the height
                 scale: size.to((value) => `${value}`),
-                zIndex: size.to((value) => `${Math.floor(value*25)}`),
+                zIndex: size.to((value) => `${value === 1 ? 'auto' : Math.floor(value*25)}`),
                 borderRadius: `${point.parameters.pointBorderRadius}%`,
                 ...color
             }}
