@@ -2,7 +2,6 @@ import React from 'react';
 import { useSpring, animated } from 'react-spring';
 import { Point } from './classes/Point';
 import styles from './styles/AnimatedPoint.module.css';
-import { defaultPointsParameters } from './classes/defaultParameters';
 
 interface Props {
     point: Point;
@@ -19,7 +18,7 @@ const AnimatedPoint = ({ point }: Props) => {
         config: { duration: 500, easing: t => 1 - (1 - t) * (1 - t) }, // Use ease-out easing
     })
 
-    const basePointSize = point.parameters?.basePointSize ?? defaultPointsParameters.basePointSize;
+    const basePointSize = point.parameters.basePointSize;
     return (
         <animated.div
             className={styles.point}

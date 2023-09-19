@@ -1,5 +1,4 @@
 import { Points, PointsParameters } from "./Points";
-import { defaultPointsParameters } from './defaultParameters';
 
 export class Point {
     readonly x: number;
@@ -15,7 +14,7 @@ export class Point {
         this.y = y;
         this.distance = null;
         this.points = points;
-        this.parameters = { ...defaultPointsParameters, ...points.parameters };
+        this.parameters = points.parameters;
         this.scale = 1;
         this.color = this.parameters.colorMain || '#000000';
     }
@@ -38,17 +37,13 @@ export class Point {
 
     public update() {
         const {
-            basePointSize = 16,
-            pointMaxScale = 4,
-            distanceBetweenPoints = 16,
-            hoverRadius = 180,
-            colorMain = '#ECECEC',
-            colorSecondary = '#B7B7B7',
-            isHoverEffect = true,
-            isColorChange = true,
-            isScaleChange = true,
-            isGradientAnimation = true,
-            padding = 16,
+            pointMaxScale,
+            hoverRadius,
+            colorMain,
+            colorSecondary,
+            isHoverEffect,
+            isColorChange,
+            isScaleChange,
         } = this.points.parameters;
 
         if (this.points.cursorPosition.x === null || this.points.cursorPosition.y === null) {

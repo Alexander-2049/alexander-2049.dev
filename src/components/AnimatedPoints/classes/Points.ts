@@ -1,20 +1,19 @@
 import { Point } from './Point';
 import { Position } from '../types/Position';
-import { defaultPointsParameters } from './defaultParameters';
 
 export interface PointsParameters {
-    basePointSize?: number;
-    pointMaxScale?: number;
-    distanceBetweenPoints?: number;
-    hoverRadius?: number;
-    colorMain?: string;
-    padding?: number;
-    colorSecondary?: string;
-    isHoverEffect?: boolean;
-    isColorChange?: boolean;
-    isScaleChange?: boolean;
-    isGradientAnimation?: boolean;
-    pointBorderRadius?: number;
+    basePointSize: number;
+    pointMaxScale: number;
+    distanceBetweenPoints: number;
+    hoverRadius: number;
+    colorMain: string;
+    colorSecondary: string;
+    padding: number;
+    isHoverEffect: boolean;
+    isColorChange: boolean;
+    isScaleChange: boolean;
+    isGradientAnimation: boolean;
+    pointBorderRadius: number;
 }
 
 export class Points {
@@ -28,14 +27,27 @@ export class Points {
     constructor(
         width: number,
         height: number,
-        parameters: PointsParameters = {}
+        parameters: PointsParameters = {
+            basePointSize: 48,
+            pointMaxScale: 4,
+            distanceBetweenPoints: 16,
+            hoverRadius: 180,
+            colorMain: '#ECECEC',
+            colorSecondary: '#B7B7B7',
+            padding: 16,
+            isHoverEffect: true,
+            isColorChange: true,
+            isScaleChange: true,
+            isGradientAnimation: true,
+            pointBorderRadius: 50,
+        }
     ) {
         this.width = width;
         this.height = height;
         this.cursorPosition = { x: null, y: null };
         this.isCursorInside = false;
         this.points = [];
-        this.parameters = { ...defaultPointsParameters, ...parameters };
+        this.parameters = parameters;
         this.setup();
     }
 
@@ -44,10 +56,6 @@ export class Points {
     }
 
     private setup() {
-        if (this.parameters.basePointSize === undefined) return null;
-        if (this.parameters.distanceBetweenPoints === undefined) return null;
-        if (this.parameters.padding === undefined) return null;
-
         const pointsInRow = this.getCapacity(
             this.parameters.basePointSize,
             this.parameters.distanceBetweenPoints,
